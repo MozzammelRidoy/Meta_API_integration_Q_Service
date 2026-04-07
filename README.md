@@ -119,7 +119,7 @@ A mock function that deliberately behaves like a real unreliable external API:
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/MozzammelRidoy/meta_api_integration_q_service
+git clone https://github.com/MozzammelRidoy/Meta_API_integration_Q_Service
 cd meta_api_integration_q_service
 ```
 
