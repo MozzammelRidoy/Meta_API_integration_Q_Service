@@ -1,0 +1,19 @@
+
+
+model AdInsights {
+  id          String   @id @default(uuid())
+  campaign_id String
+  impressions Int
+  clicks      Int
+  spend       Float
+  date        DateTime 
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  isDeleted   Boolean
+
+  @@unique([campaign_id, date])
+  @@index([campaign_id])
+  @@index([date])
+
+  @@map("ad_insights")
+}

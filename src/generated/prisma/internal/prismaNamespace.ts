@@ -412,7 +412,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never
   : FieldRef<Model, FieldType>
 
 export const ModelName = {
-  User: 'User'
+  AdInsights: 'AdInsights'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -434,82 +434,82 @@ export type TypeMap<
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: 'user'
+    modelProps: 'adInsights'
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
-    User: {
-      payload: Prisma.$UserPayload<ExtArgs>
-      fields: Prisma.UserFieldRefs
+    AdInsights: {
+      payload: Prisma.$AdInsightsPayload<ExtArgs>
+      fields: Prisma.AdInsightsFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.UserFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPayload> | null
+          args: Prisma.AdInsightsFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdInsightsPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.UserFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPayload>
+          args: Prisma.AdInsightsFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdInsightsPayload>
         }
         findFirst: {
-          args: Prisma.UserFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPayload> | null
+          args: Prisma.AdInsightsFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdInsightsPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.UserFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPayload>
+          args: Prisma.AdInsightsFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdInsightsPayload>
         }
         findMany: {
-          args: Prisma.UserFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPayload>[]
+          args: Prisma.AdInsightsFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdInsightsPayload>[]
         }
         create: {
-          args: Prisma.UserCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPayload>
+          args: Prisma.AdInsightsCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdInsightsPayload>
         }
         createMany: {
-          args: Prisma.UserCreateManyArgs<ExtArgs>
+          args: Prisma.AdInsightsCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         createManyAndReturn: {
-          args: Prisma.UserCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPayload>[]
+          args: Prisma.AdInsightsCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdInsightsPayload>[]
         }
         delete: {
-          args: Prisma.UserDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPayload>
+          args: Prisma.AdInsightsDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdInsightsPayload>
         }
         update: {
-          args: Prisma.UserUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPayload>
+          args: Prisma.AdInsightsUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdInsightsPayload>
         }
         deleteMany: {
-          args: Prisma.UserDeleteManyArgs<ExtArgs>
+          args: Prisma.AdInsightsDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.UserUpdateManyArgs<ExtArgs>
+          args: Prisma.AdInsightsUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateManyAndReturn: {
-          args: Prisma.UserUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPayload>[]
+          args: Prisma.AdInsightsUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdInsightsPayload>[]
         }
         upsert: {
-          args: Prisma.UserUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPayload>
+          args: Prisma.AdInsightsUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdInsightsPayload>
         }
         aggregate: {
-          args: Prisma.UserAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateUser>
+          args: Prisma.AdInsightsAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAdInsights>
         }
         groupBy: {
-          args: Prisma.UserGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.UserGroupByOutputType>[]
+          args: Prisma.AdInsightsGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AdInsightsGroupByOutputType>[]
         }
         count: {
-          args: Prisma.UserCountArgs<ExtArgs>
+          args: Prisma.AdInsightsCountArgs<ExtArgs>
           result:
-            | runtime.Types.Utils.Optional<Prisma.UserCountAggregateOutputType>
+            | runtime.Types.Utils.Optional<Prisma.AdInsightsCountAggregateOutputType>
             | number
         }
       }
@@ -553,12 +553,20 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel =
   (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
-export const UserScalarFieldEnum = {
-  id: 'id'
+export const AdInsightsScalarFieldEnum = {
+  id: 'id',
+  campaign_id: 'campaign_id',
+  impressions: 'impressions',
+  clicks: 'clicks',
+  spend: 'spend',
+  date: 'date',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  isDeleted: 'isDeleted'
 } as const
 
-export type UserScalarFieldEnum =
-  (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+export type AdInsightsScalarFieldEnum =
+  (typeof AdInsightsScalarFieldEnum)[keyof typeof AdInsightsScalarFieldEnum]
 
 export const SortOrder = {
   asc: 'asc',
@@ -608,6 +616,46 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<
 export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<
   $PrismaModel,
   'Int[]'
+>
+
+/**
+ * Reference to a field of type 'Float'
+ */
+export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<
+  $PrismaModel,
+  'Float'
+>
+
+/**
+ * Reference to a field of type 'Float[]'
+ */
+export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<
+  $PrismaModel,
+  'Float[]'
+>
+
+/**
+ * Reference to a field of type 'DateTime'
+ */
+export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<
+  $PrismaModel,
+  'DateTime'
+>
+
+/**
+ * Reference to a field of type 'DateTime[]'
+ */
+export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<
+  $PrismaModel,
+  'DateTime[]'
+>
+
+/**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<
+  $PrismaModel,
+  'Boolean'
 >
 
 /**
@@ -713,7 +761,7 @@ export type PrismaClientOptions = (
   comments?: runtime.SqlCommenterPlugin[]
 }
 export type GlobalOmitConfig = {
-  user?: Prisma.UserOmit
+  adInsights?: Prisma.AdInsightsOmit
 }
 
 /* Types for Logging */

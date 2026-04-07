@@ -1,5 +1,6 @@
 import express, { Router } from 'express'
 import { MetaRoutes } from '../modules/meta/meta_api_route'
+import { AdInsightsRoutes } from '../modules/ad_insights/ad_insights_route'
 
 /**
  * Main router configuration
@@ -17,6 +18,10 @@ const moduleRoutes = [
   {
     path: '/meta',
     route: MetaRoutes
+  },
+  {
+    path: '/insights',
+    route: AdInsightsRoutes
   }
 ]
 

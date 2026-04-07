@@ -19,7 +19,7 @@ const config: runtime.GetPrismaClientConfig = {
   engineVersion: '75cbdc1eb7150937890ad5465d861175c6624711',
   activeProvider: 'postgresql',
   inlineSchema:
-    '// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = "prisma-client"\n  output   = "../src/generated/prisma"\n}\n\ndatasource db {\n  provider = "postgresql"\n}\n\n// Define your data models here\nmodel User {\n  id String @id @default(uuid())\n}\n',
+    'model AdInsights {\n  id          String   @id @default(uuid())\n  campaign_id String\n  impressions Int\n  clicks      Int\n  spend       Float\n  date        DateTime\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n  isDeleted   Boolean\n\n  @@unique([campaign_id, date])\n  @@index([campaign_id])\n  @@index([date])\n  @@map("ad_insights")\n}\n\n// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = "prisma-client"\n  output   = "../../src/generated/prisma"\n}\n\ndatasource db {\n  provider = "postgresql"\n}\n',
   runtimeDataModel: {
     models: {},
     enums: {},
@@ -32,14 +32,14 @@ const config: runtime.GetPrismaClientConfig = {
 }
 
 config.runtimeDataModel = JSON.parse(
-  '{"models":{"User":{"fields":[{"name":"id","kind":"scalar","type":"String"}],"dbName":null}},"enums":{},"types":{}}'
+  '{"models":{"AdInsights":{"fields":[{"name":"id","kind":"scalar","type":"String"},{"name":"campaign_id","kind":"scalar","type":"String"},{"name":"impressions","kind":"scalar","type":"Int"},{"name":"clicks","kind":"scalar","type":"Int"},{"name":"spend","kind":"scalar","type":"Float"},{"name":"date","kind":"scalar","type":"DateTime"},{"name":"createdAt","kind":"scalar","type":"DateTime"},{"name":"updatedAt","kind":"scalar","type":"DateTime"},{"name":"isDeleted","kind":"scalar","type":"Boolean"}],"dbName":"ad_insights"}},"enums":{},"types":{}}'
 )
 config.parameterizationSchema = {
   strings: JSON.parse(
-    '["where","User.findUnique","User.findUniqueOrThrow","orderBy","cursor","User.findFirst","User.findFirstOrThrow","User.findMany","data","User.createOne","User.createMany","User.createManyAndReturn","User.updateOne","User.updateMany","User.updateManyAndReturn","create","update","User.upsertOne","User.deleteOne","User.deleteMany","having","_count","_min","_max","User.groupBy","User.aggregate","AND","OR","NOT","id","equals","in","notIn","lt","lte","gt","gte","contains","startsWith","endsWith","not","set"]'
+    '["where","AdInsights.findUnique","AdInsights.findUniqueOrThrow","orderBy","cursor","AdInsights.findFirst","AdInsights.findFirstOrThrow","AdInsights.findMany","data","AdInsights.createOne","AdInsights.createMany","AdInsights.createManyAndReturn","AdInsights.updateOne","AdInsights.updateMany","AdInsights.updateManyAndReturn","create","update","AdInsights.upsertOne","AdInsights.deleteOne","AdInsights.deleteMany","having","_count","_avg","_sum","_min","_max","AdInsights.groupBy","AdInsights.aggregate","AND","OR","NOT","id","campaign_id","impressions","clicks","spend","date","createdAt","updatedAt","isDeleted","equals","not","in","notIn","lt","lte","gt","gte","contains","startsWith","endsWith","campaign_id_date","set","increment","decrement","multiply","divide"]'
   ),
   graph:
-    'JAkQBBoAAB8AMBsAAAQAEBwAAB8AMB0BAAAAAQEAAAABACABAAAAAQAgBBoAAB8AMBsAAAQAEBwAAB8AMB0BACAAIQADAAAABAAgAwAABQAwBAAAAQAgAwAAAAQAIAMAAAUAMAQAAAEAIAMAAAAEACADAAAFADAEAAABACABHQEAAAABAQgAAAkAIAEdAQAAAAEBCAAACwAwAQgAAAsAMAEdAQAkACECAAAAAQAgCAAADgAgAR0BACQAIQIAAAAEACAIAAAQACACAAAABAAgCAAAEAAgAwAAAAEAIA8AAAkAIBAAAA4AIAEAAAABACABAAAABAAgAxUAACEAIBYAACMAIBcAACIAIAQaAAAaADAbAAAXABAcAAAaADAdAQAbACEDAAAABAAgAwAAFgAwFAAAFwAgAwAAAAQAIAMAAAUAMAQAAAEAIAQaAAAaADAbAAAXABAcAAAaADAdAQAbACEOFQAAHQAgFgAAHgAgFwAAHgAgHgEAAAABHwEAAAAEIAEAAAAEIQEAAAABIgEAAAABIwEAAAABJAEAAAABJQEAAAABJgEAAAABJwEAAAABKAEAHAAhDhUAAB0AIBYAAB4AIBcAAB4AIB4BAAAAAR8BAAAABCABAAAABCEBAAAAASIBAAAAASMBAAAAASQBAAAAASUBAAAAASYBAAAAAScBAAAAASgBABwAIQgeAgAAAAEfAgAAAAQgAgAAAAQhAgAAAAEiAgAAAAEjAgAAAAEkAgAAAAEoAgAdACELHgEAAAABHwEAAAAEIAEAAAAEIQEAAAABIgEAAAABIwEAAAABJAEAAAABJQEAAAABJgEAAAABJwEAAAABKAEAHgAhBBoAAB8AMBsAAAQAEBwAAB8AMB0BACAAIQseAQAAAAEfAQAAAAQgAQAAAAQhAQAAAAEiAQAAAAEjAQAAAAEkAQAAAAElAQAAAAEmAQAAAAEnAQAAAAEoAQAeACEAAAABKQEAAAABAAAAAAMVAAYWAAcXAAgAAAADFQAGFgAHFwAIAQIBAgMBBQYBBgcBBwgBCQoBCgwCCw0DDA8BDRECDhIEERMBEhQBExUCGBgFGRkJ'
+    'OgsQDRwAACoAMB0AAAQAEB4AACoAMB8BAAAAASABACsAISECACwAISICACwAISMIAC0AISRAAC4AISVAAC4AISZAAC4AIScgAC8AITMAADAAIAEAAAABACABAAAAAQAgDBwAACoAMB0AAAQAEB4AACoAMB8BACsAISABACsAISECACwAISICACwAISMIAC0AISRAAC4AISVAAC4AISZAAC4AIScgAC8AIQADAAAABAAgAwAABQAwBAAAAQAgAwAAAAQAIAMAAAUAMAQAAAEAIAMAAAAEACADAAAFADAEAAABACAJHwEAAAABIAEAAAABIQIAAAABIgIAAAABIwgAAAABJEAAAAABJUAAAAABJkAAAAABJyAAAAABAQgAAAkAIAkfAQAAAAEgAQAAAAEhAgAAAAEiAgAAAAEjCAAAAAEkQAAAAAElQAAAAAEmQAAAAAEnIAAAAAEBCAAACwAwAQgAAAsAMAkfAQA2ACEgAQA2ACEhAgA3ACEiAgA3ACEjCAA4ACEkQAA5ACElQAA5ACEmQAA5ACEnIAA6ACECAAAAAQAgCAAADgAgCR8BADYAISABADYAISECADcAISICADcAISMIADgAISRAADkAISVAADkAISZAADkAIScgADoAIQIAAAAEACAIAAAQACACAAAABAAgCAAAEAAgAwAAAAEAIA8AAAkAIBAAAA4AIAEAAAABACABAAAABAAgBRUAADEAIBYAADIAIBcAADUAIBgAADQAIBkAADMAIAwcAAAaADAdAAAXABAeAAAaADAfAQAbACEgAQAbACEhAgAcACEiAgAcACEjCAAdACEkQAAeACElQAAeACEmQAAeACEnIAAfACEDAAAABAAgAwAAFgAwFAAAFwAgAwAAAAQAIAMAAAUAMAQAAAEAIAwcAAAaADAdAAAXABAeAAAaADAfAQAbACEgAQAbACEhAgAcACEiAgAcACEjCAAdACEkQAAeACElQAAeACEmQAAeACEnIAAfACEOFQAAIQAgGAAAKQAgGQAAKQAgKAEAAAABKQEAKAAhKgEAAAAEKwEAAAAELAEAAAABLQEAAAABLgEAAAABLwEAAAABMAEAAAABMQEAAAABMgEAAAABDRUAACEAIBYAACYAIBcAACEAIBgAACEAIBkAACEAICgCAAAAASkCACcAISoCAAAABCsCAAAABCwCAAAAAS0CAAAAAS4CAAAAAS8CAAAAAQ0VAAAhACAWAAAmACAXAAAmACAYAAAmACAZAAAmACAoCAAAAAEpCAAlACEqCAAAAAQrCAAAAAQsCAAAAAEtCAAAAAEuCAAAAAEvCAAAAAELFQAAIQAgGAAAJAAgGQAAJAAgKEAAAAABKUAAIwAhKkAAAAAEK0AAAAAELEAAAAABLUAAAAABLkAAAAABL0AAAAABBRUAACEAIBgAACIAIBkAACIAICggAAAAASkgACAAIQUVAAAhACAYAAAiACAZAAAiACAoIAAAAAEpIAAgACEIKAIAAAABKQIAIQAhKgIAAAAEKwIAAAAELAIAAAABLQIAAAABLgIAAAABLwIAAAABAiggAAAAASkgACIAIQsVAAAhACAYAAAkACAZAAAkACAoQAAAAAEpQAAjACEqQAAAAAQrQAAAAAQsQAAAAAEtQAAAAAEuQAAAAAEvQAAAAAEIKEAAAAABKUAAJAAhKkAAAAAEK0AAAAAELEAAAAABLUAAAAABLkAAAAABL0AAAAABDRUAACEAIBYAACYAIBcAACYAIBgAACYAIBkAACYAICgIAAAAASkIACUAISoIAAAABCsIAAAABCwIAAAAAS0IAAAAAS4IAAAAAS8IAAAAAQgoCAAAAAEpCAAmACEqCAAAAAQrCAAAAAQsCAAAAAEtCAAAAAEuCAAAAAEvCAAAAAENFQAAIQAgFgAAJgAgFwAAIQAgGAAAIQAgGQAAIQAgKAIAAAABKQIAJwAhKgIAAAAEKwIAAAAELAIAAAABLQIAAAABLgIAAAABLwIAAAABDhUAACEAIBgAACkAIBkAACkAICgBAAAAASkBACgAISoBAAAABCsBAAAABCwBAAAAAS0BAAAAAS4BAAAAAS8BAAAAATABAAAAATEBAAAAATIBAAAAAQsoAQAAAAEpAQApACEqAQAAAAQrAQAAAAQsAQAAAAEtAQAAAAEuAQAAAAEvAQAAAAEwAQAAAAExAQAAAAEyAQAAAAEMHAAAKgAwHQAABAAQHgAAKgAwHwEAKwAhIAEAKwAhIQIALAAhIgIALAAhIwgALQAhJEAALgAhJUAALgAhJkAALgAhJyAALwAhCygBAAAAASkBACkAISoBAAAABCsBAAAABCwBAAAAAS0BAAAAAS4BAAAAAS8BAAAAATABAAAAATEBAAAAATIBAAAAAQgoAgAAAAEpAgAhACEqAgAAAAQrAgAAAAQsAgAAAAEtAgAAAAEuAgAAAAEvAgAAAAEIKAgAAAABKQgAJgAhKggAAAAEKwgAAAAELAgAAAABLQgAAAABLggAAAABLwgAAAABCChAAAAAASlAACQAISpAAAAABCtAAAAABCxAAAAAAS1AAAAAAS5AAAAAAS9AAAAAAQIoIAAAAAEpIAAiACECIAEAAAABJEAAAAABAAAAAAABNAEAAAABBTQCAAAAATUCAAAAATYCAAAAATcCAAAAATgCAAAAAQU0CAAAAAE1CAAAAAE2CAAAAAE3CAAAAAE4CAAAAAEBNEAAAAABATQgAAAAAQAAAAAFFQAGFgAHFwAIGAAJGQAKAAAAAAAFFQAGFgAHFwAIGAAJGQAKAQIBAgMBBQYBBgcBBwgBCQoBCgwCCw0DDA8BDRECDhIEERMBEhQBExUCGhgFGxkL'
 }
 
 async function decodeBase64AsWasm(
@@ -80,8 +80,8 @@ export interface PrismaClientConstructor {
    * const prisma = new PrismaClient({
    *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
    * })
-   * // Fetch zero or more Users
-   * const users = await prisma.user.findMany()
+   * // Fetch zero or more AdInsights
+   * const adInsights = await prisma.adInsights.findMany()
    * ```
    *
    * Read more in our [docs](https://pris.ly/d/client).
@@ -111,8 +111,8 @@ export interface PrismaClientConstructor {
  * const prisma = new PrismaClient({
  *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
  * })
- * // Fetch zero or more Users
- * const users = await prisma.user.findMany()
+ * // Fetch zero or more AdInsights
+ * const adInsights = await prisma.adInsights.findMany()
  * ```
  *
  * Read more in our [docs](https://pris.ly/d/client).
@@ -243,14 +243,14 @@ export interface PrismaClient<
   >
 
   /**
-   * `prisma.user`: Exposes CRUD operations for the **User** model.
+   * `prisma.adInsights`: Exposes CRUD operations for the **AdInsights** model.
    * Example usage:
    * ```ts
-   * // Fetch zero or more Users
-   * const users = await prisma.user.findMany()
+   * // Fetch zero or more AdInsights
+   * const adInsights = await prisma.adInsights.findMany()
    * ```
    */
-  get user(): Prisma.UserDelegate<ExtArgs, { omit: OmitOpts }>
+  get adInsights(): Prisma.AdInsightsDelegate<ExtArgs, { omit: OmitOpts }>
 }
 
 export function getPrismaClientClass(): PrismaClientConstructor {

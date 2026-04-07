@@ -54,7 +54,7 @@ export const JsonNull = runtime.JsonNull
 export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
-  User: 'User'
+  AdInsights: 'AdInsights'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -73,12 +73,20 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel =
   (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
-export const UserScalarFieldEnum = {
-  id: 'id'
+export const AdInsightsScalarFieldEnum = {
+  id: 'id',
+  campaign_id: 'campaign_id',
+  impressions: 'impressions',
+  clicks: 'clicks',
+  spend: 'spend',
+  date: 'date',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  isDeleted: 'isDeleted'
 } as const
 
-export type UserScalarFieldEnum =
-  (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+export type AdInsightsScalarFieldEnum =
+  (typeof AdInsightsScalarFieldEnum)[keyof typeof AdInsightsScalarFieldEnum]
 
 export const SortOrder = {
   asc: 'asc',
