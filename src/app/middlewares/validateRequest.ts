@@ -29,11 +29,12 @@ import AppError from '../errors/AppError'
 const validateRequest = (schema: AnyZodObject) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     try {
-      // Prepare the data to validate (body, cookies, and params)
+      // Prepare the data to validate (body, cookies, params, and query)
       const dataToValidate = {
         body: req.body,
         cookies: req.cookies,
-        params: req.params
+        params: req.params,
+        query: req.query
       }
 
       // Validate the data against the schema
