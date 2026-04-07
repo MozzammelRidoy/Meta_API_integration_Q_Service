@@ -45,7 +45,8 @@ const config = {
   email_sender_email_app_pass: ensureEnv('EMAIL_SENDER_EMAIL_APP_PASS'),
   email_sender_name: ensureEnv('EMAIL_SENDER_NAME'),
   email_reply_to: ensureEnv('EMAIL_REPLY_TO'),
-  email_test_recipient: ensureEnv('EMAIL_TEST_RECIPIENTS')
+  email_test_recipient: ensureEnv('EMAIL_TEST_RECIPIENTS'),
+  redis_cache_db_url: ensureEnv('RADIS_CACHE_DB_URL')
 }
 
 export default config

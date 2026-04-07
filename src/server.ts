@@ -3,6 +3,7 @@ import { Server } from 'http'
 import app from './app'
 import config from './app/config'
 import { prisma } from './app/shared/prisma'
+import { verifyRedisConnection } from './app/redis/redis_connection'
 
 let server: Server
 let isShuttingDown = false
@@ -46,6 +47,12 @@ const shutdown = async (signal: string) => {
  */
 async function main() {
   try {
+    // Verify Redis first — exits cleanly on auth/connection failure
+    await verifyRedisConnection()
+
+    // Only start the worker after Redis is confirmed healthy
+    await import('./app/queue/ad_insights_worker')
+
     await prisma.$connect()
     console.log('✅ PostgreSQL connected via Prisma')
 

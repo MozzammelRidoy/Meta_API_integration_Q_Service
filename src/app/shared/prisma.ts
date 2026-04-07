@@ -6,8 +6,8 @@ const connectionString = config.postgresql_database_url
 
 const adapter = new PrismaPg({ connectionString })
 const prisma = new PrismaClient({
-  adapter,
-  log: ['query', 'info', 'warn', 'error']
+  adapter
+  // log: ['query', 'info', 'warn', 'error']
 })
 
 export { prisma }
